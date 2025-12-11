@@ -5,13 +5,25 @@ import datetime
 
 WEBHOOK_URL = "https://discord.com/api/webhooks/1448748226206502993/f8IcbH3aLb5wqdAnAN36oXadMS5NXcqMXqwfaX01i3nI0iNqW0yu3zg6wIdDykUyBBKq"
 
-# ---- AL JE DATA HIERONDER ----
-usernames = ["NovaRBLX","PixelStorm","GalaxyStrike"]
-robux_options = [("25,000 Robux", "€19.99"), ("50,000 Robux", "€34.99")]
+# ---- 5000 ROBLOX-STYLE USERNAMES (voorbeeld: laad vanuit txt) ----
+with open("usernames_5000.txt", "r", encoding="utf-8") as f:
+    usernames = [line.strip() for line in f]
+
+robux_options = [
+    ("25,000 Robux", "€19.99"),
+    ("50,000 Robux", "€34.99"),
+    ("100,000 Robux", "€59.99"),
+    ("150,000 Robux", "€79.99"),
+    ("250,000 Robux", "€129.99")
+]
+
 payment_methods = ["💠 Litecoin","💳 PayPal","📱 Tikkie"]
-time_formats = ["Just now","1 minute ago","5 minutes ago"]
+
+time_formats = ["Just now","1 minute ago","5 minutes ago","12 minutes ago","27 minutes ago","1 hour ago","2 hours ago"]
+
 GIF_BANNER = "https://i.postimg.cc/K8vwGtN8/Schermafbeelding-2025-12-11-200714.png"
 
+# ---- FUNCTIE DIE EEN NIEUWE EMBED MAAKT (zonder review) ----
 def send_embed():
     random_user = random.choice(usernames)
     random_robux, random_price = random.choice(robux_options)
@@ -41,8 +53,9 @@ def send_embed():
 
     data = {"username": "BloxxVault", "embeds": [embed]}
     requests.post(WEBHOOK_URL, json=data)
-    print("Embed verzonden!")
+    print(f"Embed verzonden voor {random_user} ({random_robux})!")
 
+# ---- LOOP MET RANDOM INTERVAL 10-25 MIN ----
 def is_allowed_time():
     now = datetime.datetime.now().time()
     start = datetime.time(8, 0)   # 08:00
