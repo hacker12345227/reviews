@@ -111,3 +111,15 @@ def send_embed():
     requests.post(WEBHOOK_URL, json=data)
 
 send_embed()  # GitHub workflow roept dit script elke 5 minuten aan
+
+import time
+
+def run_bot_task():
+    # Plaats hier jouw bestaande webhook/bot code
+    print("Bot draait!")
+
+if __name__ == "__main__":
+    while True:
+        run_bot_task()
+        time.sleep(300)  # 300 seconden = 5 minuten
+
