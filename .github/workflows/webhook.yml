@@ -2,7 +2,7 @@ name: BloxxVault Webhook Bot
 
 on:
   schedule:
-    - cron: "*/5 * * * *"   # elke 5 minuten
+    - cron: "0 * * * *"   # 1x per uur
   workflow_dispatch:
 
 jobs:
