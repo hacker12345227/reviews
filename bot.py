@@ -2,7 +2,7 @@ import requests
 import random
 import json
 
-WEBHOOK_URL = "jouw_webhook_url_hier"
+WEBHOOK_URL = "https://discord.com/api/webhooks/1448748226206502993/f8IcbH3aLb5wqdAnAN36oXadMS5NXcqMXqwfaX01i3nI0iNqW0yu3zg6wIdDykUyBBKq"
 
 # ---- Load usernames ----
 with open("usernames_5000.txt", "r", encoding="utf-8") as f:
