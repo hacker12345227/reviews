@@ -5,10 +5,15 @@ import datetime
 
 WEBHOOK_URL = "https://discord.com/api/webhooks/1448748226206502993/f8IcbH3aLb5wqdAnAN36oXadMS5NXcqMXqwfaX01i3nI0iNqW0yu3zg6wIdDykUyBBKq"
 
-# ---- 5000 ROBLOX-STYLE USERNAMES (voorbeeld: laad vanuit txt) ----
-with open("usernames_5000.txt", "r", encoding="utf-8") as f:
+# ---- usernames uit file inladen ----
+with open("usernames.txt", "r", encoding="utf-8") as f:
     usernames = [line.strip() for line in f]
 
+# ---- Extra usernames handmatig toevoegen ----
+extra_usernames = ["ExtraUser1", "ExtraUser2", "SuperNovaX"]
+usernames.extend(extra_usernames)
+
+# ---- Robux opties ----
 robux_options = [
     ("25,000 Robux", "€19.99"),
     ("50,000 Robux", "€34.99"),
@@ -23,7 +28,7 @@ time_formats = ["Just now","1 minute ago","5 minutes ago","12 minutes ago","27 m
 
 GIF_BANNER = "https://i.postimg.cc/K8vwGtN8/Schermafbeelding-2025-12-11-200714.png"
 
-# ---- FUNCTIE DIE EEN NIEUWE EMBED MAAKT (zonder review) ----
+# ---- Embed functie (zonder review) ----
 def send_embed():
     random_user = random.choice(usernames)
     random_robux, random_price = random.choice(robux_options)
@@ -55,7 +60,7 @@ def send_embed():
     requests.post(WEBHOOK_URL, json=data)
     print(f"Embed verzonden voor {random_user} ({random_robux})!")
 
-# ---- LOOP MET RANDOM INTERVAL 10-25 MIN ----
+# ---- Loop met nachtmodus en random delay 10-25 min ----
 def is_allowed_time():
     now = datetime.datetime.now().time()
     start = datetime.time(8, 0)   # 08:00
@@ -66,9 +71,9 @@ if __name__ == "__main__":
     while True:
         if is_allowed_time():
             send_embed()
-            delay = random.randint(600, 1500)   # 10–25 minuten
+            delay = random.randint(600, 1500)  # 10–25 minuten
             print(f"Wachten: {delay/60:.1f} minuten")
             time.sleep(delay)
         else:
             print("Nachtmodus actief (22:00–08:00) — geen berichten.")
-            time.sleep(600)  # elke 10 min opnieuw controleren
+            time.sleep(600)  # elke 10 min controleren
