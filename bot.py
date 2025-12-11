@@ -3,9 +3,14 @@ import random
 import time
 
 WEBHOOK_URL = "https://discord.com/api/webhooks/1448748226206502993/f8IcbH3aLb5wqdAnAN36oXadMS5NXcqMXqwfaX01i3nI0iNqW0yu3zg6wIdDykUyBBKq"  # <-- PLAK HIER JOUW WEBHOOK
+import requests
+import random
+import time
 
+WEBHOOK_URL = "JOUW_WEBHOOK_HIER"  # <-- PLAK HIER JOUW WEBHOOK
 
 # ---- 200+ ROBLOX-STYLE USERNAMES ----
+
 usernames = [
     "NovaRBLX","PixelStorm","GalaxyStrike","FireNova","LunarEcho","ZenithRBLX","StormWizard",
     "ByteHunter","ShadowPulse","SolarFlame","NightRogue","CyberWolf","EchoBlade","RiftMaster",
@@ -40,12 +45,13 @@ usernames = [
 ]
 
 # ---- OPTIONS ----
+
 robux_options = [
-    ("25,000 Robux", "€19.99"),
-    ("50,000 Robux", "€34.99"),
-    ("100,000 Robux", "€59.99"),
-    ("150,000 Robux", "€79.99"),
-    ("250,000 Robux", "€129.99")
+    "25,000 Robux",
+    "50,000 Robux",
+    "100,000 Robux",
+    "150,000 Robux",
+    "250,000 Robux"
 ]
 
 payment_methods = [
@@ -79,9 +85,10 @@ time_formats = [
 GIF_BANNER = "https://i.imgur.com/abcd123.gif"   # <-- JOUW GIF
 
 # ---- SEND WEBHOOK ----
+
 def send_embed():
     random_user = random.choice(usernames)
-    random_robux, random_price = random.choice(robux_options)
+    random_robux = random.choice(robux_options)
     random_ticket = random.randint(100000000000000, 999999999999999)
     random_stars = random.randint(3, 5)
     random_payment = random.choice(payment_methods)
@@ -99,7 +106,7 @@ def send_embed():
             {"name": "Stars", "value": f"{stars_display} ({random_stars}/5)", "inline": True},
             {"name": "User", "value": f"`{random_user}`", "inline": True},
             {"name": "Payment Method", "value": random_payment, "inline": True},
-            {"name": "Robux Purchased", "value": f"🟧 **{random_robux}**\n💵 {random_price}", "inline": True},
+            {"name": "Robux Purchased", "value": f"🟧 **{random_robux}**", "inline": True},
             {"name": "Ticket ID", "value": f"🎫 `{random_ticket}`", "inline": True},
             {"name": "Review", "value": random_review, "inline": False},
             {"name": "Time", "value": random_time, "inline": True}
