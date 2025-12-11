@@ -2,18 +2,15 @@ import requests
 import random
 import json
 
-# ---- Webhook URL ----
-WEBHOOK_URL = "https://discord.com/api/webhooks/1448748226206502993/f8IcbH3aLb5wqdAnAN36oXadMS5NXcqMXqwfaX01i3nI0iNqW0yu3zg6wIdDykUyBBKq"
+WEBHOOK_URL = "jouw_webhook_url_hier"
 
-# ---- Load usernames from file ----
+# ---- Load usernames ----
 with open("usernames_5000.txt", "r", encoding="utf-8") as f:
     usernames = [line.strip() for line in f]
 
-# ---- Extra usernames you can add manually ----
 extra_usernames = ["ExtraUser1", "ExtraUser2", "SuperNovaX"]
 usernames.extend(extra_usernames)
 
-# ---- Robux options ----
 robux_options = [
     ("25,000 Robux", "€19.99"),
     ("50,000 Robux", "€34.99"),
@@ -35,7 +32,6 @@ WEBHOOK_AVATAR = config.get("avatar_url", "")
 GIF_BANNER = config.get("banner_url", "")
 BIO_TEXT = config.get("bio_text", "")
 
-# ---- Embed function ----
 def send_embed():
     random_user = random.choice(usernames)
     random_robux, random_price = random.choice(robux_options)
@@ -73,8 +69,7 @@ def send_embed():
     requests.post(WEBHOOK_URL, json=data)
     print(f"Embed verzonden voor {random_user} ({random_robux})!")
 
-# ---- Main loop (geen slaap, testmodus) ----
 if __name__ == "__main__":
     while True:
         send_embed()
-        print("Volgende bericht wordt direct verzonden (geen slaapmodus)")
+        print("Volgende bericht wordt direct verzonden (testmodus, geen slaap)")
