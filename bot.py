@@ -73,7 +73,7 @@ def send_embed():
     requests.post(WEBHOOK_URL, json=data)
     print(f"Embed verzonden voor {random_user} ({random_robux})!")
 
-# ---- Main loop (testmodus: geen vertraging, 24/7) ----
+# ---- Main loop (geen slaap, testmodus) ----
 if __name__ == "__main__":
     while True:
         send_embed()
