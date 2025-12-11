@@ -4,15 +4,18 @@ import time
 import datetime
 import json
 
+# ---- Webhook URL ----
 WEBHOOK_URL = "https://discord.com/api/webhooks/1448748226206502993/f8IcbH3aLb5wqdAnAN36oXadMS5NXcqMXqwfaX01i3nI0iNqW0yu3zg6wIdDykUyBBKq"
 
-# ---- Load usernames ----
+# ---- Load usernames from file ----
 with open("usernames_5000.txt", "r", encoding="utf-8") as f:
     usernames = [line.strip() for line in f]
 
+# ---- Extra usernames you can add manually ----
 extra_usernames = ["ExtraUser1", "ExtraUser2", "SuperNovaX"]
 usernames.extend(extra_usernames)
 
+# ---- Robux options ----
 robux_options = [
     ("25,000 Robux", "€19.99"),
     ("50,000 Robux", "€34.99"),
@@ -34,7 +37,7 @@ WEBHOOK_AVATAR = config.get("avatar_url", "")
 GIF_BANNER = config.get("banner_url", "")
 BIO_TEXT = config.get("bio_text", "")
 
-# ---- Embed functie ----
+# ---- Embed function ----
 def send_embed():
     random_user = random.choice(usernames)
     random_robux, random_price = random.choice(robux_options)
@@ -49,7 +52,7 @@ def send_embed():
 
     embed = {
         "title": f"🟧 Order Confirmed — Thank You!{verified_text}",
-        "description": BIO_TEXT,   # <-- Bio tekst hier
+        "description": BIO_TEXT,
         "color": 16744192,
         "fields": [
             {"name": "Stars", "value": f"{stars_display} ({random_stars}/5)", "inline": True},
@@ -72,20 +75,21 @@ def send_embed():
     requests.post(WEBHOOK_URL, json=data)
     print(f"Embed verzonden voor {random_user} ({random_robux})!")
 
-# ---- Loop met nachtmodus ----
+# ---- Night mode check ----
 def is_allowed_time():
     now = datetime.datetime.now().time()
-    start = datetime.time(8, 0)
-    end = datetime.time(22, 0)
+    start = datetime.time(8, 0)   # 08:00
+    end = datetime.time(22, 0)    # 22:00
     return start <= now <= end
 
+# ---- Main loop (test mode: every 2 minutes) ----
 if __name__ == "__main__":
     while True:
         if is_allowed_time():
             send_embed()
-            delay = random.randint(600, 1500)  # 10–25 min
-            print(f"Wachten: {delay/60:.1f} minuten")
+            delay = 120  # 2 minuten = 120 seconden
+            print(f"Wachten: {delay/60:.1f} minuten (testmodus)")
             time.sleep(delay)
         else:
             print("Nachtmodus actief (22:00–08:00)")
-            time.sleep(600)
+            time.sleep(600)  # check elke 10 min
