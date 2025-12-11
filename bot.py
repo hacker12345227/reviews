@@ -1,7 +1,5 @@
 import requests
 import random
-import time
-import datetime
 import json
 
 # ---- Webhook URL ----
@@ -75,21 +73,8 @@ def send_embed():
     requests.post(WEBHOOK_URL, json=data)
     print(f"Embed verzonden voor {random_user} ({random_robux})!")
 
-# ---- Night mode check ----
-def is_allowed_time():
-    now = datetime.datetime.now().time()
-    start = datetime.time(8, 0)   # 08:00
-    end = datetime.time(22, 0)    # 22:00
-    return start <= now <= end
-
-# ---- Main loop (test mode: every 2 minutes) ----
+# ---- Main loop (testmodus: geen vertraging, 24/7) ----
 if __name__ == "__main__":
     while True:
-        if is_allowed_time():
-            send_embed()
-            delay = 120  # 2 minuten = 120 seconden
-            print(f"Wachten: {delay/60:.1f} minuten (testmodus)")
-            time.sleep(delay)
-        else:
-            print("Nachtmodus actief (22:00–08:00)")
-            time.sleep(600)  # check elke 10 min
+        send_embed()
+        print("Volgende bericht wordt direct verzonden (geen slaapmodus)")
