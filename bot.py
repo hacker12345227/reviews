@@ -3,13 +3,12 @@ import random
 import time
 import datetime
 
-WEBHOOK_URL = "https://discord.com/api/webhooks/1448748226206502993/f8IcbH3aLb5wqdAnAN36oXadMS5NXcqMXqwfaX01i3nI0iNqW0yu3zg6wIdDykUyBBKq"  # <-- PLAK HIER JOUW WEBHOOK
+WEBHOOK_URL = "https://discord.com/api/webhooks/1448748226206502993/f8IcbH3aLb5wqdAnAN36oXadMS5NXcqMXqwfaX01i3nI0iNqW0yu3zg6wIdDykUyBBKq"
 
-# ---- AL JE DATA HIERONDER (ingekort voor voorbeeld) ----
+# ---- AL JE DATA HIERONDER ----
 usernames = ["NovaRBLX","PixelStorm","GalaxyStrike"]
 robux_options = [("25,000 Robux", "€19.99"), ("50,000 Robux", "€34.99")]
 payment_methods = ["💠 Litecoin","💳 PayPal","📱 Tikkie"]
-review_sentences = ["Fast delivery! 🔥","Super smooth transaction!"]
 time_formats = ["Just now","1 minute ago","5 minutes ago"]
 GIF_BANNER = "https://i.postimg.cc/K8vwGtN8/Schermafbeelding-2025-12-11-200714.png"
 
@@ -19,7 +18,6 @@ def send_embed():
     random_ticket = random.randint(100000000000000, 999999999999999)
     random_stars = random.randint(3, 5)
     random_payment = random.choice(payment_methods)
-    random_review = random.choice(review_sentences)
     random_time = random.choice(time_formats)
     verified = random.random() < 0.30
 
@@ -35,7 +33,6 @@ def send_embed():
             {"name": "Payment Method", "value": random_payment, "inline": True},
             {"name": "Robux Purchased", "value": f"🟧 **{random_robux}**\n💵 {random_price}", "inline": True},
             {"name": "Ticket ID", "value": f"🎫 `{random_ticket}`", "inline": True},
-            {"name": "Review", "value": random_review, "inline": False},
             {"name": "Time", "value": random_time, "inline": True}
         ],
         "image": {"url": GIF_BANNER},
